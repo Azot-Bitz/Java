@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class TFDemo extends JFrame {
@@ -9,42 +10,44 @@ public class TFDemo extends JFrame {
     JTextField jtf2;
     JTextField jtf3;
     JTextField jtf4;
+    JTextField jtf5;
     JButton jbtnRev;
     JLabel jlabPrompt, jlabContents;
-    Image image = Toolkit.getDefaultToolkit().getImage("C:\\Users\\admin\\Java\\Java8\\src\\lesson8\\ball.jpg");
+    Image image = Toolkit.getDefaultToolkit().getImage("C:\\Users\\admin\\Java\\Java1\\HomeTask8\\src\\ball.jpg");
     JButton img1;
     JButton img2;
     JButton img3;
     JButton img4;
     JButton img5;
+    JButton end;
     JFrame jfrm;
+    JButton[] arr = {img1, img2, img3, img4, img5};
 
     static int counter;
 
+
+
     public void changePlayers() {
-        jfrm.remove(img1);
-        jfrm.setVisible(false);
-        jfrm.add(img2);
-        jfrm.setVisible(true);
+        img1.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java1\\HomeTask8\\src\\messi.jpg"));
+//        jfrm.setVisible(false);
+//        jfrm.add(img2);
+//        jfrm.setVisible(true);
     }
 
     public void changePlayers2() {
-        jfrm.remove(img2);
-        jfrm.setVisible(false);
-        jfrm.add(img3);
-        jfrm.setVisible(true);
+        img1.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java1\\HomeTask8\\src\\neymar.jpg"));
+//        jfrm.setVisible(false);
+//        jfrm.add(img3);
+//        jfrm.setVisible(true);
     }
     public void changePlayers3() {
-        jfrm.remove(img3);
-        jfrm.setVisible(false);
-        jfrm.add(img4);
-        jfrm.setVisible(true);
+        img1.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java1\\HomeTask8\\src\\ronaldo.jpg"));
     }
     public void changePlayers4() {
-        jfrm.remove(img4);
-        jfrm.setVisible(false);
-        jfrm.add(img5);
-        jfrm.setVisible(true);
+        img1.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java1\\HomeTask8\\src\\aguero.jpg"));
+    }
+    public void changePlayers5() {
+        img1.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java1\\HomeTask8\\src\\end.jpg"));
     }
 
 
@@ -62,27 +65,31 @@ public class TFDemo extends JFrame {
         jtf3.setActionCommand("myTF");
         jtf4 = new JTextField(10);
         jtf4.setActionCommand("myTF");
+        jtf5 = new JTextField(10);
+        jtf5.setActionCommand("myTF");
         img1 = new JButton();
-        img1.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java8\\src\\lesson8\\Cavani.jpg"));
-        img2 = new JButton();
-        img2.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java8\\src\\lesson8\\messi.jpg"));
-        img3 = new JButton();
-        img3.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java8\\src\\lesson8\\neymar.jpg"));
-        img4 = new JButton();
-        img4.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java8\\src\\lesson8\\ronaldo.jpg"));
-        img5 = new JButton();
-        img5.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java8\\src\\lesson8\\aguero.jpg"));
-        JButton jbtnRev = new JButton("Ответить");
+        img1.setIcon(new ImageIcon("C:\\Users\\admin\\Java\\Java1\\HomeTask8\\src\\Cavani.jpg"));
+
+        jlabPrompt = new JLabel("Введите текст: ");
+        jlabContents = new JLabel("");
+        jfrm.add(jlabPrompt);
+        jfrm.add(jtf1);
+        jfrm.add(jtf2);
+        jfrm.add(jtf3);
+        jfrm.add(jtf4);
+        jfrm.add(jtf5);
+        jfrm.add(img1);
+        jfrm.add(jlabContents);
+        jfrm.setVisible(true);
         jtf1.addActionListener(e -> {
-            System.out.println(jtf1.getText());
-            String orgStr1 = jtf1.getText();
-            if (orgStr1.equals("Кавани")) {
-                counter++;
-                changePlayers();
-            } else {
-                changePlayers();
-            }
-        });
+                    String orgStr1 = jtf1.getText();
+                    if (orgStr1.equals("Кавани")) {
+                        counter++;
+                        changePlayers();
+                    }else {
+                        changePlayers();
+                    }
+                });
         jtf2.addActionListener(e -> {
             String orgStr2 = jtf2.getText();
             if (orgStr2.equals("Месси")) {
@@ -102,7 +109,7 @@ public class TFDemo extends JFrame {
             }
         });
         jtf4.addActionListener(e -> {
-            String orgStr4 = jtf1.getText();
+            String orgStr4 = jtf4.getText();
             if (orgStr4.equals("Роналду")) {
                 counter++;
                 changePlayers4();
@@ -110,30 +117,24 @@ public class TFDemo extends JFrame {
                 changePlayers4();
             }
         });
-        jbtnRev.addActionListener(e -> {
-
-        });
-        jlabPrompt = new JLabel("Введите текст: ");
-        jlabContents = new JLabel("");
-        jfrm.add(jlabPrompt);
-        jfrm.add(jtf1);
-        jfrm.add(img1);
-        jfrm.add(jbtnRev);
-        jfrm.add(jlabContents);
-        jfrm.setVisible(true);
-
+        jtf5.addActionListener(e -> {
+                    String orgStr5 = jtf5.getText();
+                    if (orgStr5.equals("Агуэро")) {
+                        counter++;
+                        changePlayers5();
+                    }else {
+                        changePlayers5();
+                    }
+                    jfrm.remove(this);
+            jlabContents.setText("Вы угадали: " + counter);
+                });
     }
 
-
-    public void actionPerformed(ActionEvent ae) {
-//        if (ae.getActionCommand().equals("Ответить")) {
-
-    }
     public static void main(String[] args) {
         new TFDemo();
 
 
-        System.out.println("Правильных ответов: " + counter);
+
     }
 
 }
